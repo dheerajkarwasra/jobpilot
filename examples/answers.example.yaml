@@ -1,0 +1,78 @@
+# Answers for an unattended setup:  jobpilot setup --answers answers.yaml
+# Every key is optional. Missing keys take the default the wizard would show.
+# Do not commit this file if you fill in the secret fields.
+
+workspace: ~/JobPilot
+resume_path: ~/Documents/resume.pdf          # docx, pdf, txt or md
+
+# About you (read from the resume when left out)
+name: Alex Example
+email: alex@example.com
+phone: "+49 151 00000000"
+location: Berlin, Germany
+linkedin: linkedin.com/in/alexexample
+github: github.com/alexexample
+portfolio: ""
+about: Backend developer who likes building tools for other developers.
+
+degree: M.Sc. Computer Science
+school: Example University
+graduation: "2027"
+
+work_permit: Student residence permit, max 20h per week during semester   # leave empty if none
+hours_per_week: "20"
+available_from: "2026-11-01"
+
+languages:
+  - {language: English, level: C1}
+  - {language: German, level: A2}
+
+# Search
+country: de                     # de, at, ch, nl, fr, uk, us, in
+remote_ok: true
+role_types: [werkstudent, internship, entry]       # also thesis, fulltime
+fields: [software, ai]                             # also data, devops, frontend, security
+# queries_en: [...]             # generated from role types and fields when left out
+# queries_local: [...]
+skills: [Python, FastAPI, PostgreSQL, Docker, TypeScript]
+max_local_language_level_ok: A2
+exclude_title: [sales, marketing, recruiting]
+exclude_companies: [Randstad, Hays, Adecco]
+
+# Writing
+writing_rules:
+  - Plain, human sounding language
+  - No em dashes
+  - Direct tone, short sentences
+banned_words: [passionate, synergy, leverage, dynamic]
+
+# Assistants: claude, codex, gemini, projects, claude_app
+assistants: [claude, codex]
+
+# Tracker: xlsx or gsheets
+tracker_backend: xlsx
+# gsheet_id: 1AbC...
+# service_account_json: google-service-account.json
+
+# Optional sources
+adzuna: false
+# adzuna_app_id: ""
+# adzuna_app_key: ""
+apify: false
+# apify_token: ""
+# apify_budget: "4"
+
+watchlist: [DeepL, Zalando, N26]
+probe_watchlist: true
+
+# Automation
+schedule: true
+search_every_hours: "6"
+install_schedule: true
+inbox: false
+# mail_provider: gmail          # gmail, outlook, other
+# imap_user: alex@example.com
+# imap_password: ""             # app password
+# inbox_time: "07:52"
+
+first_search: true

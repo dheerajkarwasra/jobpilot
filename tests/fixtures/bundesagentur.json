@@ -1,0 +1,15 @@
+{
+ "stellenangebote": [
+  {
+   "titel": "Werkstudent (m/w/d) Softwareentwicklung KI",
+   "beruf": "Softwareentwickler/in",
+   "refnr": "10001-1234567-S",
+   "arbeitgeber": "Agentur Kunde GmbH",
+   "arbeitsort": {
+    "ort": "Mannheim",
+    "region": "Baden-W\u00fcrttemberg"
+   },
+   "aktuelleVeroeffentlichungsdatum": "2026-10-11"
+  }
+ ]
+}

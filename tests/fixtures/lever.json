@@ -1,0 +1,14 @@
+[
+ {
+  "id": "abcd1234-0000",
+  "text": "Backend Engineering Intern",
+  "categories": {
+   "location": "Berlin",
+   "commitment": "Internship"
+  },
+  "hostedUrl": "https://jobs.lever.co/acme/abcd1234",
+  "createdAt": 1791709200000,
+  "descriptionPlain": "Python, APIs, English speaking team",
+  "workplaceType": "hybrid"
+ }
+]

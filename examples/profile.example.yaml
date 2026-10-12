@@ -1,0 +1,251 @@
+# Example profile.yaml written by `jobpilot setup` for a made up person.
+# Yours lives in your workspace. Edit it, then run `jobpilot assistants`.
+version: 1
+person:
+  name: Alex Example
+  email: alex@example.com
+  phone: +49 151 00000000
+  location: Berlin, Germany
+  linkedin: linkedin.com/in/alexexample
+  github: github.com/alexexample
+  portfolio: ''
+about: Backend developer who likes building tools for other developers.
+education:
+- degree: M.Sc. Computer Science
+  school: Example University
+  end: '2027'
+status:
+  work_permit: Student residence permit, max 20h per week during semester
+  hours_per_week: '20'
+  available_from: '2026-11-01'
+languages:
+- language: English
+  level: C1
+- language: German
+  level: A2
+skills:
+- Python
+- FastAPI
+- PostgreSQL
+- Docker
+- TypeScript
+resume:
+  source: ''
+  original: resume/resume.pdf
+  text: resume/resume.md
+search:
+  country: de
+  remote_ok: true
+  role_types:
+  - werkstudent
+  - internship
+  - entry
+  fields:
+  - software
+  - ai
+  queries_en:
+  - Working Student Software Engineer
+  - Software Engineer Intern
+  - Junior Software Engineer
+  - Working Student Backend Developer
+  - Backend Developer Intern
+  - Junior Backend Developer
+  - Working Student AI Engineer
+  - AI Engineer Intern
+  - Junior AI Engineer
+  - Working Student Machine Learning Engineer
+  - Machine Learning Engineer Intern
+  - Junior Machine Learning Engineer
+  queries_local:
+  - Werkstudent Softwareentwicklung
+  - Praktikum Softwareentwicklung
+  - Werkstudent KI
+  - Praktikum KI
+  local_language: german
+  max_local_language_level_ok: A2
+  max_age_days: 3
+  must_match_any:
+  - agent
+  - agents
+  - ai
+  - api
+  - backend
+  - deep learning
+  - developer
+  - docker
+  - entwickler
+  - fastapi
+  - full stack
+  - fullstack
+  - genai
+  - generative ai
+  - ki
+  - llm
+  - machine learning
+  - ml
+  - nlp
+  - postgresql
+  - python
+  - rag
+  - software
+  - softwareentwicklung
+  - typescript
+  exclude_title:
+  - sales
+  - marketing
+  - recruiting
+  exclude_companies:
+  - Randstad
+  - Hays
+  - Adecco
+  exclude_description:
+  - sicherheitsüberprüfung
+  - security clearance
+  - deutsche staatsbürgerschaft
+  - german citizenship required
+  location_keywords:
+  - germany
+  - deutschland
+  - berlin
+  - munich
+  - münchen
+  - muenchen
+  - hamburg
+  - frankfurt
+  - cologne
+  - köln
+  - koeln
+  - stuttgart
+  - düsseldorf
+  - duesseldorf
+  - dusseldorf
+  - leipzig
+  - dresden
+  - hannover
+  - hanover
+  - nuremberg
+  - nürnberg
+  - nuernberg
+  - bremen
+  - essen
+  - dortmund
+  - karlsruhe
+  - mannheim
+  - heidelberg
+  - kaiserslautern
+  - darmstadt
+  - bonn
+  - aachen
+  - münster
+  - muenster
+  - freiburg
+  - ulm
+  - augsburg
+  - potsdam
+  - walldorf
+  - garching
+  - erlangen
+  - wiesbaden
+  - mainz
+  - saarbrücken
+  - regensburg
+  - ingolstadt
+  - wolfsburg
+  - braunschweig
+  - jena
+  - kiel
+  - lübeck
+  - rostock
+  - dach
+scoring:
+  keywords:
+    primary:
+    - software
+    - backend
+    - full stack
+    - fullstack
+    - api
+    - developer
+    - entwickler
+    - softwareentwicklung
+    core:
+    - agent
+    - agents
+    - ai
+    - deep learning
+    - docker
+    - fastapi
+    - genai
+    - generative ai
+    - ki
+    - llm
+    - machine learning
+    - ml
+    - nlp
+    - postgresql
+    - python
+    - rag
+    - typescript
+    secondary:
+    - docker
+    - git
+    - linux
+    - cloud
+    - ci/cd
+    - sql
+  penalize_fulltime: true
+  weights: {}
+watchlist:
+- name: DeepL
+  active: true
+  ats: ''
+  slug: ''
+  why: careers system not detected
+- name: Zalando
+  active: true
+  ats: ''
+  slug: ''
+  why: careers system not detected
+- name: N26
+  active: true
+  ats: ''
+  slug: ''
+  why: careers system not detected
+writing:
+  rules:
+  - Plain, human sounding language
+  - No em dashes
+  - Direct tone, short sentences
+  banned_words:
+  - passionate
+  - synergy
+  - leverage
+  - dynamic
+  cover_letter_paragraphs: 3 to 4
+assistant:
+  targets:
+  - claude
+  - codex
+  - gemini
+  - projects
+  - claude_app
+tracker:
+  backend: xlsx
+  xlsx_path: tracker/Job_Search_Tracker.xlsx
+sources:
+  arbeitnow: true
+  bundesagentur: true
+  adzuna: false
+  watchlist: true
+  apify_linkedin: false
+  apify_xing: false
+  apify_monthly_budget_usd: 4.0
+  apify_run_hours:
+  - 6
+  - 18
+  arbeitnow_pages: 5
+schedule:
+  search_every_hours: 0
+  inbox_daily_at: 07:52
+inbox:
+  enabled: false

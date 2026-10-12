@@ -1,0 +1,162 @@
+# Built-in defaults. The setup wizard copies the relevant parts into the user's
+# profile.yaml, where they can be edited. Nothing here is personal data.
+
+role_types:
+  werkstudent:
+    label: "Working student (Werkstudent)"
+    title_markers: ["werkstudent", "working student", "studentische", "student assistant", "student job", "studentenjob", "hiwi"]
+    type_label: "Werkstudent"
+  internship:
+    label: "Internship (Praktikum)"
+    title_markers: ["intern", "internship", "praktikum", "praktikant", "trainee"]
+    type_label: "Internship"
+  thesis:
+    label: "Thesis (Abschlussarbeit)"
+    title_markers: ["thesis", "abschlussarbeit", "masterarbeit", "bachelorarbeit"]
+    type_label: "Thesis"
+  entry:
+    label: "Entry level / Junior / Graduate"
+    title_markers: ["junior", "graduate", "entry level", "entry-level", "associate", "berufseinsteiger", "absolvent", "new grad"]
+    type_label: "Entry"
+  fulltime:
+    label: "Any full time role (mid level included)"
+    title_markers: []
+    type_label: "Full time"
+
+# Query presets per field. The wizard combines these with the chosen role types.
+fields:
+  software:
+    label: "Software engineering (backend, full stack)"
+    en: ["Software Engineer", "Backend Developer", "Full Stack Developer"]
+    de: ["Softwareentwicklung", "Backend Entwickler"]
+    keywords: ["software", "backend", "full stack", "fullstack", "api", "developer", "entwickler", "softwareentwicklung"]
+  ai:
+    label: "AI / ML / LLM engineering"
+    en: ["AI Engineer", "Machine Learning Engineer", "LLM Engineer"]
+    de: ["KI", "Machine Learning"]
+    keywords: ["ai", "ki", "machine learning", "ml", "llm", "genai", "generative ai", "agent", "agents", "rag", "nlp", "deep learning"]
+  data:
+    label: "Data engineering / analytics"
+    en: ["Data Engineer", "Data Analyst"]
+    de: ["Data Engineering", "Datenanalyse"]
+    keywords: ["data engineering", "data engineer", "etl", "data pipeline", "analytics", "sql", "data analyst"]
+  devops:
+    label: "DevOps / Cloud / Platform"
+    en: ["DevOps Engineer", "Cloud Engineer", "Platform Engineer"]
+    de: ["DevOps", "Cloud"]
+    keywords: ["devops", "cloud", "kubernetes", "aws", "azure", "gcp", "terraform", "platform", "sre"]
+  frontend:
+    label: "Frontend / Web"
+    en: ["Frontend Developer", "Web Developer"]
+    de: ["Frontend Entwickler", "Webentwicklung"]
+    keywords: ["frontend", "react", "vue", "angular", "web", "typescript", "javascript"]
+  security:
+    label: "Security"
+    en: ["Security Engineer"]
+    de: ["IT Sicherheit"]
+    keywords: ["security", "sicherheit", "appsec", "pentest", "soc"]
+
+# Title words that almost never fit a technical profile. Users can edit.
+exclude_title_default: ["sales", "verkauf", "vertrieb", "marketing", "recruiting", "recruiter", "talent acquisition",
+  "hr ", "human resources", "personal", "controlling", "accounting", "buchhaltung", "finance", "einkauf", "procurement",
+  "customer service", "kundenservice", "presales", "content creator", "video", "social media", "steuer"]
+
+exclude_description_default: ["sicherheitsüberprüfung", "security clearance", "deutsche staatsbürgerschaft", "german citizenship required"]
+
+staffing_agencies_default: ["univativ", "jobriver", "hays", "randstad", "adecco", "brunel", "ferchau", "akkodis",
+  "amadeus fire", "robert half", "michael page", "experis", "manpower", "orizon", "persona service", "gulp"]
+
+# Language requirement detection. "required" means the posting asks for a level
+# the user does not have; "optional" means the language is a plus only.
+languages:
+  german:
+    code: de
+    stopwords: ["und", "der", "die", "das", "mit", "für", "wir", "sie", "ihre", "eine", "bei", "auf", "von", "zu", "ist", "werden", "unser", "deine", "du", "dich"]
+    required: ["fließend deutsch", "fliessend deutsch", "fließende deutschkenntnisse", "verhandlungssicher", "muttersprache", "muttersprachlich",
+      "sehr gute deutschkenntnisse", "sehr gute deutsch", "exzellente deutschkenntnisse", "deutsch auf c1", "deutsch c1", "deutsch (c1", "deutsch c2",
+      "deutsch b2", "deutsch (b2", "deutschkenntnisse (b2", "deutschkenntnisse (c1", "fluent german", "fluent in german", "german (c1", "german c1",
+      "german (b2", "german b2", "native german", "business fluent german", "german is required", "german required", "excellent german"]
+    optional: ["deutsch von vorteil", "deutschkenntnisse von vorteil", "deutschkenntnisse wünschenswert", "deutsch wünschenswert",
+      "german is a plus", "german is nice to have", "german nice to have", "german would be a plus", "german is beneficial",
+      "german is not required", "no german required", "german not required", "basic german"]
+    english_ok: ["english is our working language", "working language is english", "company language is english", "english-speaking team",
+      "english speaking team", "our team speaks english", "unternehmenssprache ist englisch", "arbeitssprache ist englisch", "arbeitssprache englisch"]
+  french:
+    code: fr
+    stopwords: ["et", "le", "la", "les", "des", "pour", "avec", "nous", "vous", "une", "dans", "sur", "est"]
+    required: ["français courant", "francais courant", "maîtrise du français", "fluent french", "french c1", "native french"]
+    optional: ["french is a plus", "le français est un plus"]
+    english_ok: ["working language is english"]
+  dutch:
+    code: nl
+    stopwords: ["en", "de", "het", "een", "van", "voor", "met", "wij", "jij", "je", "op", "is"]
+    required: ["vloeiend nederlands", "fluent dutch", "native dutch", "dutch c1"]
+    optional: ["dutch is a plus"]
+    english_ok: ["working language is english"]
+
+english_stopwords: ["and", "the", "with", "for", "you", "your", "our", "we", "are", "will", "of", "to", "in", "is", "on", "as", "an", "be"]
+
+# Location keywords used to keep ATS (watchlist) postings inside the target country.
+countries:
+  de:
+    name: "Germany"
+    language: german
+    location_keywords: ["germany", "deutschland", "berlin", "munich", "münchen", "muenchen", "hamburg", "frankfurt", "cologne", "köln",
+      "koeln", "stuttgart", "düsseldorf", "duesseldorf", "dusseldorf", "leipzig", "dresden", "hannover", "hanover", "nuremberg", "nürnberg",
+      "nuernberg", "bremen", "essen", "dortmund", "karlsruhe", "mannheim", "heidelberg", "kaiserslautern", "darmstadt", "bonn", "aachen",
+      "münster", "muenster", "freiburg", "ulm", "augsburg", "potsdam", "walldorf", "garching", "erlangen", "wiesbaden", "mainz", "saarbrücken",
+      "regensburg", "ingolstadt", "wolfsburg", "braunschweig", "jena", "kiel", "lübeck", "rostock", "dach"]
+    adzuna: de
+    arbeitnow: true
+    bundesagentur: true
+  at:
+    name: "Austria"
+    language: german
+    location_keywords: ["austria", "österreich", "vienna", "wien", "graz", "linz", "salzburg", "innsbruck", "dach"]
+    adzuna: at
+  ch:
+    name: "Switzerland"
+    language: german
+    location_keywords: ["switzerland", "schweiz", "suisse", "zurich", "zürich", "basel", "bern", "geneva", "genève", "lausanne", "dach"]
+    adzuna: ch
+  nl:
+    name: "Netherlands"
+    language: dutch
+    location_keywords: ["netherlands", "nederland", "amsterdam", "rotterdam", "utrecht", "eindhoven", "the hague", "den haag", "delft"]
+    adzuna: nl
+  fr:
+    name: "France"
+    language: french
+    location_keywords: ["france", "paris", "lyon", "toulouse", "marseille", "lille", "nantes", "grenoble"]
+    adzuna: fr
+  uk:
+    name: "United Kingdom"
+    language: null
+    location_keywords: ["united kingdom", "uk", "england", "london", "manchester", "cambridge", "oxford", "edinburgh", "bristol"]
+    adzuna: gb
+  us:
+    name: "United States"
+    language: null
+    location_keywords: ["united states", "usa", "us", "remote - us"]
+    adzuna: us
+  in:
+    name: "India"
+    language: null
+    location_keywords: ["india", "bangalore", "bengaluru", "hyderabad", "pune", "mumbai", "delhi", "gurgaon", "gurugram", "noida", "chennai"]
+    adzuna: in
+
+remote_keywords: ["remote", "anywhere", "europe", "emea", "eu", "home office", "homeoffice", "work from home", "distributed"]
+
+# Scoring rubric (points). High >= high_threshold, Medium >= medium_threshold.
+scoring:
+  english_or_language_ok: 3
+  primary_keyword: 3
+  core_keyword: 2
+  secondary_keyword: 1
+  watchlist_company: 1
+  language_likely_needed: -2
+  fulltime_visa_risk: -2
+  consultancy: -1
+  high_threshold: 6
+  medium_threshold: 3
+  consultancy_markers: ["consulting", "beratung", "consultant", "accenture", "capgemini", "deloitte", "pwc", "kpmg", "sopra steria", "bearingpoint", "d-fine"]

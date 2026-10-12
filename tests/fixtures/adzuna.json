@@ -1,0 +1,18 @@
+{
+ "results": [
+  {
+   "id": "5555",
+   "title": "Junior <strong>Backend</strong> Developer",
+   "company": {
+    "display_name": "Example SE"
+   },
+   "location": {
+    "display_name": "Hamburg, Deutschland"
+   },
+   "created": "2026-10-11T07:00:00Z",
+   "redirect_url": "https://www.adzuna.de/details/5555",
+   "description": "Python FastAPI backend role, team speaks English",
+   "contract_time": "full_time"
+  }
+ ]
+}

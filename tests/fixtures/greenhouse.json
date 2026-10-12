@@ -1,0 +1,36 @@
+{
+ "jobs": [
+  {
+   "id": 901,
+   "title": "Working Student Machine Learning (f/m/d)",
+   "location": {
+    "name": "Munich, Germany"
+   },
+   "absolute_url": "https://job-boards.greenhouse.io/acmeai/jobs/901",
+   "updated_at": "2026-10-10T10:00:00-04:00",
+   "first_published": "2026-10-10T10:00:00-04:00",
+   "content": "&lt;p&gt;Build RAG and LLM agents in Python. English is our working language. German is a plus.&lt;/p&gt;",
+   "requisition_id": "REQ-2026-77"
+  },
+  {
+   "id": 902,
+   "title": "Account Executive",
+   "location": {
+    "name": "Remote, US"
+   },
+   "absolute_url": "https://job-boards.greenhouse.io/acmeai/jobs/902",
+   "updated_at": "2026-10-10T10:00:00-04:00",
+   "content": "Sales role"
+  },
+  {
+   "id": 903,
+   "title": "Software Engineering Intern",
+   "location": {
+    "name": "London, UK"
+   },
+   "absolute_url": "https://job-boards.greenhouse.io/acmeai/jobs/903",
+   "updated_at": "2026-10-10T10:00:00-04:00",
+   "content": "Python backend"
+  }
+ ]
+}

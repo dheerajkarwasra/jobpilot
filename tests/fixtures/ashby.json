@@ -1,0 +1,15 @@
+{
+ "jobs": [
+  {
+   "id": "ff00aa11-xx",
+   "title": "Working Student Data Engineering",
+   "location": "Remote (Europe)",
+   "jobUrl": "https://jobs.ashbyhq.com/acme/ff00aa11",
+   "publishedAt": "2026-10-11T08:00:00Z",
+   "isRemote": true,
+   "isListed": true,
+   "descriptionPlain": "SQL, Python and data pipelines. English.",
+   "employmentType": "PartTime"
+  }
+ ]
+}

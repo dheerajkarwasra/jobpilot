@@ -1,0 +1,83 @@
+{
+ "data": [
+  {
+   "slug": "working-student-ai-engineer-berlin-123456",
+   "company_name": "Glindway GmbH",
+   "title": "Working Student AI Software Engineer (m/f/d)",
+   "description": "<p>We build LLM agents with Python and FastAPI. Our working language is English.</p>",
+   "remote": false,
+   "url": "https://www.arbeitnow.com/jobs/companies/glindway/working-student-ai-software-engineer-berlin-123456",
+   "tags": [
+    "AI"
+   ],
+   "job_types": [
+    "working student"
+   ],
+   "location": "Berlin",
+   "created_at": 1791709200
+  },
+  {
+   "slug": "werkstudent-backend-muenchen-222",
+   "company_name": "Beispiel AG",
+   "title": "Werkstudent Backend Entwicklung (m/w/d)",
+   "description": "<p>Wir suchen Unterst\u00fctzung f\u00fcr unser Team. Du entwickelst APIs mit Python. Sehr gute Deutschkenntnisse (C1) sind erforderlich und wir arbeiten mit dir zusammen.</p>",
+   "remote": false,
+   "url": "https://www.arbeitnow.com/jobs/companies/beispiel/werkstudent-backend-muenchen-222",
+   "tags": [],
+   "job_types": [],
+   "location": "M\u00fcnchen",
+   "created_at": 1791709200
+  },
+  {
+   "slug": "werkstudent-controlling-333",
+   "company_name": "Aer Group",
+   "title": "Werkstudent Controlling (m/w/d)",
+   "description": "Controlling und Finance mit Excel und SQL",
+   "remote": false,
+   "url": "https://www.arbeitnow.com/jobs/companies/aer/werkstudent-controlling-333",
+   "tags": [],
+   "job_types": [],
+   "location": "Berlin",
+   "created_at": 1791709200
+  },
+  {
+   "slug": "senior-engineer-444",
+   "company_name": "TWAICE",
+   "title": "Senior Software Engineer",
+   "description": "Python backend",
+   "remote": false,
+   "url": "https://www.arbeitnow.com/jobs/companies/twaice/senior-444",
+   "tags": [],
+   "job_types": [],
+   "location": "Munich",
+   "created_at": 1791709200
+  },
+  {
+   "slug": "working-student-data-old-555",
+   "company_name": "OldCo",
+   "title": "Working Student Data Engineering",
+   "description": "Python data pipelines",
+   "remote": false,
+   "url": "https://www.arbeitnow.com/jobs/companies/oldco/old-555",
+   "tags": [],
+   "job_types": [],
+   "location": "Hamburg",
+   "created_at": 1790845200
+  },
+  {
+   "slug": "werkstudent-software-666",
+   "company_name": "Kleine Firma GmbH",
+   "title": "Werkstudent Softwareentwicklung (m/w/d)",
+   "description": "Wir entwickeln Software mit Python und Docker f\u00fcr unsere Kunden. Du arbeitest im Team und bist an der Uni eingeschrieben.",
+   "remote": false,
+   "url": "https://www.arbeitnow.com/jobs/companies/kleine/werkstudent-software-666",
+   "tags": [],
+   "job_types": [],
+   "location": "Karlsruhe",
+   "created_at": 1791795600
+  }
+ ],
+ "links": {
+  "next": null
+ }
+}
