@@ -38,7 +38,7 @@ class FakeHttp:
 
 def load(name):
     p = FIX / name
-    return json.loads(p.read_text()) if p.suffix == ".json" else p.read_text()
+    return json.loads(p.read_text(encoding="utf-8")) if p.suffix == ".json" else p.read_text(encoding="utf-8")
 
 
 BASE_ANSWERS = {
@@ -70,10 +70,10 @@ BASE_ANSWERS = {
 def workspace(tmp_path, monkeypatch):
     monkeypatch.setattr(config, "POINTER_FILE", tmp_path / "cfg" / "workspace")
     resume = tmp_path / "resume.md"
-    resume.write_text((FIX / "resume.md").read_text())
+    resume.write_text((FIX / "resume.md").read_text(encoding="utf-8"), encoding="utf-8")
     answers = dict(BASE_ANSWERS, workspace=str(tmp_path / "ws"), resume_path=str(resume))
     af = tmp_path / "answers.yaml"
-    af.write_text(yaml.safe_dump(answers))
+    af.write_text(yaml.safe_dump(answers), encoding="utf-8")
     from jobpilot.wizard import run
     run(answers_file=str(af), skip_search=True)
     ws = config.Workspace(tmp_path / "ws")
