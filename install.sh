@@ -68,7 +68,7 @@ if [ ! -x "$DIR/venv/bin/python" ]; then
 fi
 "$DIR/venv/bin/python" -m pip install -q --upgrade pip
 TARGET="$SRC"
-[ -n "$EXTRAS" ] && TARGET="$SRC[$EXTRAS]"
+[ -n "$EXTRAS" ] && TARGET="${SRC}[${EXTRAS}]"
 say "Installing JobPilot"
 "$DIR/venv/bin/python" -m pip install -q --upgrade "$TARGET"
 
@@ -81,6 +81,7 @@ case ":$PATH:" in
     RC="$HOME/.bashrc"
     case "${SHELL:-}" in */zsh) RC="$HOME/.zshrc" ;; esac
     if ! grep -qs 'jobpilot installer' "$RC"; then
+      # shellcheck disable=SC2016  # $HOME must stay literal in the rc file
       printf '\n# added by jobpilot installer\nexport PATH="$HOME/.local/bin:$PATH"\n' >> "$RC"
       warn "Added ~/.local/bin to PATH in $RC. Open a new terminal or run: export PATH=\"\$HOME/.local/bin:\$PATH\""
     fi

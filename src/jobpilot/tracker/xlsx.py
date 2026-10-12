@@ -1,6 +1,8 @@
 """Local Excel tracker (works in Excel, LibreOffice, Numbers and Google Sheets import)."""
 from __future__ import annotations
 
+import os
+import shutil
 from typing import Any, List, Tuple
 
 from openpyxl import Workbook, load_workbook
@@ -101,9 +103,20 @@ class XlsxTracker(Tracker):
                     lc.font = Font(name="Arial", size=10, color="0563C1", underline="single")
 
     def save(self) -> None:
+        """Atomic save: write a temp file, keep the last good version as .bak, then replace.
+
+        A crash or a full disk mid-write can no longer corrupt the tracker, and
+        one previous version always survives next to it.
+        """
+        tmp = self.path.with_name(self.path.stem + ".tmp.xlsx")
+        bak = self.path.with_name(self.path.stem + ".bak.xlsx")
+        self.wb.save(tmp)
         try:
-            self.wb.save(self.path)
+            if self.path.exists():
+                shutil.copy2(self.path, bak)
+            os.replace(tmp, self.path)
         except PermissionError as exc:
+            tmp.unlink(missing_ok=True)
             raise RuntimeError(f"Could not save {self.path}. Close it in Excel and run again.") from exc
 
 

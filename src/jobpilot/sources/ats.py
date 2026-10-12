@@ -7,11 +7,14 @@ These endpoints are public and meant for embedding job lists on career sites:
     personio         https://{slug}.jobs.personio.de/xml   (very common with German startups)
     recruitee        https://{slug}.recruitee.com/api/offers/
     smartrecruiters  https://api.smartrecruiters.com/v1/companies/{slug}/postings
+    workday          https://{tenant}.{wdN}.myworkdayjobs.com/wday/cxs/{tenant}/{site}/jobs
+                     (slug: 'tenant.wd3/SiteName'; common with large companies)
 """
 from __future__ import annotations
 
 import re
 import xml.etree.ElementTree as ET
+from datetime import date, timedelta
 from typing import Callable, Dict, List, Optional, Tuple
 
 from ..models import Job
@@ -128,6 +131,87 @@ def _smartrecruiters(http: Http, slug: str, company: str) -> List[Job]:
     return out
 
 
+_WD_PAYLOAD = {"appliedFacets": {}, "limit": 20, "offset": 0, "searchText": ""}
+
+
+def _workday_date(posted_on: str) -> str:
+    """Workday lists only relative dates like 'Posted 3 Days Ago'."""
+    s = (posted_on or "").lower()
+    if "today" in s:
+        return date.today().isoformat()
+    if "yesterday" in s:
+        return (date.today() - timedelta(days=1)).isoformat()
+    m = re.search(r"(\d+)(\+?)\s*day", s)
+    if m:
+        return (date.today() - timedelta(days=int(m.group(1)) + (1 if m.group(2) else 0))).isoformat()
+    return ""
+
+
+def _workday(http: Http, slug: str, company: str) -> List[Job]:
+    """Workday job boards (SAP-sized companies). Slug: 'tenant.wd3/SiteName' or 'tenant/SiteName'.
+
+    Find yours in the career page URL: https://{tenant}.{wdN}.myworkdayjobs.com/{SiteName}/...
+    Without the wdN part, wd1, wd3, wd5 and wd2 are tried.
+    """
+    tenant, _, site = slug.partition("/")
+    site = site or "External"
+    if "." in tenant:
+        tenant, wd = tenant.split(".", 1)
+        hosts = [f"{tenant}.{wd}.myworkdayjobs.com"]
+    else:
+        hosts = [f"{tenant}.wd{n}.myworkdayjobs.com" for n in (1, 3, 5, 2)]
+    base, data = "", None
+    for host in hosts:
+        base = f"https://{host}/wday/cxs/{tenant}/{site}"
+        try:
+            data = http.post_json(f"{base}/jobs", dict(_WD_PAYLOAD))
+        except SourceError:
+            continue
+        if isinstance(data, dict) and "jobPostings" in data:
+            break
+        data = None
+    if data is None:
+        raise SourceError(f"Workday board not found: {slug}")
+
+    postings = list(data.get("jobPostings") or [])
+    total = int(data.get("total") or len(postings))
+    offset = 20
+    while len(postings) < min(total, 60):
+        page = http.post_json(f"{base}/jobs", dict(_WD_PAYLOAD, offset=offset))
+        got = page.get("jobPostings") or []
+        if not got:
+            break
+        postings.extend(got)
+        offset += 20
+
+    out: List[Job] = []
+    recent_cutoff = (date.today() - timedelta(days=14)).isoformat()
+    details_left = 25
+    for it in postings:
+        path = str(it.get("externalPath") or "")
+        posted = _workday_date(str(it.get("postedOn") or ""))
+        ref = next((b for b in (it.get("bulletFields") or []) if b), "")
+        desc, link, hint = "", f"{base.split('/wday/')[0]}/{site}{path}", ""
+        # the list has no description; fetch details only for recent postings
+        if path and posted >= recent_cutoff and details_left > 0:
+            details_left -= 1
+            try:
+                info = (http.get_json(base + path) or {}).get("jobPostingInfo") or {}
+                desc = strip_html(info.get("jobDescription"))
+                link = str(info.get("externalUrl") or link)
+                hint = str(info.get("timeType") or "")
+                ref = str(info.get("jobReqId") or ref)
+            except SourceError:
+                pass
+        out.append(Job(
+            title=str(it.get("title") or ""), company=company, link=link,
+            source="Company site (Workday)", location=str(it.get("locationsText") or ""),
+            description=desc, posted_date=posted, posting_ref=str(ref),
+            employment_hint=hint,
+        ))
+    return out
+
+
 ATS: Dict[str, Callable[[Http, str, str], List[Job]]] = {
     "greenhouse": _greenhouse,
     "lever": _lever,
@@ -135,6 +219,7 @@ ATS: Dict[str, Callable[[Http, str, str], List[Job]]] = {
     "personio": _personio,
     "recruitee": _recruitee,
     "smartrecruiters": _smartrecruiters,
+    "workday": _workday,  # last: probing it costs the most requests
 }
 
 

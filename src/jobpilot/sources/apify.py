@@ -30,9 +30,12 @@ def _allowed(ctx, planned_cost: float) -> bool:
     if hours and ctx.run_hour not in hours and ctx.ws.get("sources.apify_respect_hours", True):
         ctx.log.append(f"apify skipped (runs only at hours {hours})")
         return False
-    if ctx.apify_spent_this_month + ctx.apify_spent_this_run + planned_cost > budget:
-        ctx.log.append(f"apify skipped (monthly budget {budget} USD reached)")
-        return False
+    with ctx.lock:
+        if ctx.apify_spent_this_month + ctx.apify_spent_this_run + planned_cost > budget:
+            ctx.log.append(f"apify skipped (monthly budget {budget} USD reached)")
+            return False
+        # reserve the planned cost so two parallel apify sources cannot both pass the check
+        ctx.apify_spent_this_run += planned_cost
     return True
 
 
@@ -40,7 +43,9 @@ def _run(ctx, actor: str, payload: dict, max_items: int, kind: str) -> list:
     cost = max_items * COST_PER_ITEM[kind]
     params = {"token": _token(ctx), "timeout": 240, "maxItems": max_items, "maxTotalChargeUsd": round(cost * 1.5, 2)}
     items = ctx.http.post_json(RUN_URL.format(actor=actor), payload, params=params, timeout=300)
-    ctx.apify_spent_this_run += len(items) * COST_PER_ITEM[kind]
+    with ctx.lock:
+        # replace the reservation for these items with what actually came back
+        ctx.apify_spent_this_run += (len(items) - max_items) * COST_PER_ITEM[kind]
     return items
 
 

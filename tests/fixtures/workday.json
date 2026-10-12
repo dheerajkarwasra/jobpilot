@@ -1,0 +1,26 @@
+{
+  "total": 3,
+  "jobPostings": [
+    {
+      "title": "Working Student Backend Engineering (f/m/d)",
+      "externalPath": "/job/Berlin-Office/Working-Student-Backend-Engineering_JR-1001",
+      "locationsText": "Berlin, Germany",
+      "postedOn": "Posted Today",
+      "bulletFields": ["JR-1001"]
+    },
+    {
+      "title": "Senior Staff Architect (f/m/d)",
+      "externalPath": "/job/Munich/Senior-Staff-Architect_JR-900",
+      "locationsText": "Munich, Germany",
+      "postedOn": "Posted 30+ Days Ago",
+      "bulletFields": ["JR-900"]
+    },
+    {
+      "title": "Working Student Data Platform (f/m/d)",
+      "externalPath": "/job/Remote-Germany/Working-Student-Data-Platform_JR-1002",
+      "locationsText": "Remote, Germany",
+      "postedOn": "Posted 2 Days Ago",
+      "bulletFields": ["JR-1002"]
+    }
+  ]
+}

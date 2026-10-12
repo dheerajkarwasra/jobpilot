@@ -1,5 +1,7 @@
 # JobPilot
 
+[![CI](https://github.com/dheerajkarwasra/jobpilot/actions/workflows/ci.yml/badge.svg)](https://github.com/dheerajkarwasra/jobpilot/actions/workflows/ci.yml)
+
 A job search copilot that runs on your laptop. It finds postings that fit you, keeps them in one tracker, reads replies from your inbox, and plugs into the AI coding assistant you already use (Claude Code, Codex CLI or Gemini CLI) so it can write a tailored cover letter, resume or recruiter message for any job in a few minutes.
 
 It was built for students and early career developers looking for Werkstudent, internship and junior roles in Germany, but every part is configurable: country, role types, fields, languages, scoring, sources and writing style.
@@ -81,7 +83,7 @@ jobpilot doctor                 # check that everything works
 
 ## How the search works
 
-Every run pulls from free sources first: Arbeitnow (Germany, Austria, Switzerland), the Bundesagentur fuer Arbeit job search (Germany), Adzuna if you add a key, and the public job APIs of companies on your watchlist (Greenhouse, Lever, Ashby, Personio, Recruitee, SmartRecruiters). LinkedIn and Xing are optional through Apify and run at most twice a day inside the budget you set.
+Every run pulls from free sources first: Arbeitnow (Germany, Austria, Switzerland), the Bundesagentur fuer Arbeit job search (Germany), Adzuna if you add a key, and the public job APIs of companies on your watchlist (Greenhouse, Lever, Ashby, Personio, Recruitee, SmartRecruiters and Workday, which most large employers use). LinkedIn and Xing are optional through Apify and run at most twice a day inside the budget you set.
 
 Each posting then goes through the same pipeline:
 

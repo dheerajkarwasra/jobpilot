@@ -34,6 +34,20 @@ def test_search_writes_tracker_and_dedupes(workspace):
     assert res2["rows"] == [] and res2["stats"]["duplicate"] >= len(ids)
 
 
+def test_save_is_atomic_and_keeps_backup(workspace):
+    run_search(workspace, http=FakeHttp(ROUTES), now=NOW, quiet=True)
+    t = open_tracker(workspace)
+    t.update_job("J0001", {"Status": "Shortlisted"}, "2026-10-12")
+    t.save()
+    bak = workspace.tracker_path.with_name(workspace.tracker_path.stem + ".bak.xlsx")
+    assert bak.exists(), "last good version kept as .bak"
+    assert not workspace.tracker_path.with_name(workspace.tracker_path.stem + ".tmp.xlsx").exists()
+    # the backup is the version from before this save
+    old = load_workbook(bak)["Jobs"]
+    new = load_workbook(workspace.tracker_path)["Jobs"]
+    assert new["B2"].value == "Shortlisted" and old["B2"].value == "Found"
+
+
 def test_failing_source_does_not_stop_run(workspace):
     routes = dict(ROUTES)
     routes["arbeitsagentur.de"] = RuntimeError("boom")

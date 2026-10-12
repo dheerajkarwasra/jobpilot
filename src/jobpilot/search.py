@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import re
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -59,13 +60,18 @@ def run_search(ws: Workspace, only: Optional[List[str]] = None, dry_run: bool = 
     raw: List[Job] = []
     ok, failed = [], []
     reg = registry()
-    for name in enabled_sources(ws, only):
-        try:
-            got = reg[name](ctx)
-            raw.extend(got)
-            ok.append(f"{name}({len(got)})")
-        except Exception as exc:  # noqa: BLE001 - a broken source must never stop the run
-            failed.append(f"{name}: {str(exc)[:120]}")
+    names = enabled_sources(ws, only)
+    # Sources run in parallel but results are collected in a fixed order,
+    # so job IDs stay deterministic. A broken source must never stop the run.
+    with ThreadPoolExecutor(max_workers=min(6, max(1, len(names)))) as pool:
+        futures = [(name, pool.submit(reg[name], ctx)) for name in names]
+        for name, fut in futures:
+            try:
+                got = fut.result()
+                raw.extend(got)
+                ok.append(f"{name}({len(got)})")
+            except Exception as exc:  # noqa: BLE001
+                failed.append(f"{name}: {str(exc)[:120]}")
 
     links, refs, keys = tracker.existing_sets()
     pipe = Pipeline(ws, today=today)

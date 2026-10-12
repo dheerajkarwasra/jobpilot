@@ -1,5 +1,10 @@
 import re
-import tomllib
+import sys
+
+try:
+    import tomllib  # Python 3.11+
+except ImportError:  # pragma: no cover
+    import tomli as tomllib
 
 import yaml
 
@@ -22,7 +27,8 @@ def test_profile_built_from_answers(workspace):
     assert p["scoring"]["penalize_fulltime"] is True
     assert (workspace.path / "resume" / "resume.md").read_text().startswith("ALEX EXAMPLE")
     assert workspace.tracker_path.exists()
-    assert oct((workspace.path / ".env").stat().st_mode)[-3:] == "600"
+    if sys.platform != "win32":  # Windows has no POSIX file modes
+        assert oct((workspace.path / ".env").stat().st_mode)[-3:] == "600"
 
 
 def test_skills_are_valid_for_every_assistant(workspace):

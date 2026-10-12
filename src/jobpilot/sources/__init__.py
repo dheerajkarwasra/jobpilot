@@ -7,6 +7,7 @@ Paid credits:      apify (LinkedIn, Xing) with a monthly budget guard
 """
 from __future__ import annotations
 
+import threading
 from dataclasses import dataclass, field
 from typing import Callable, Dict, List
 
@@ -27,6 +28,8 @@ class SearchContext:
     log: List[str] = field(default_factory=list)
     apify_spent_this_month: float = 0.0
     apify_spent_this_run: float = 0.0
+    # sources run in parallel; guards the apify budget counters
+    lock: threading.Lock = field(default_factory=threading.Lock, repr=False, compare=False)
 
     @property
     def all_queries(self) -> List[str]:

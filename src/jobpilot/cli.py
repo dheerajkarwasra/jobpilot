@@ -335,7 +335,7 @@ def build_parser() -> argparse.ArgumentParser:
     s = sub.add_parser("watchlist", help="Manage companies watched on their own career pages")
     s.add_argument("action", choices=["add", "remove", "list"])
     s.add_argument("name", nargs="?", default="")
-    s.add_argument("--ats", help="Skip detection, e.g. greenhouse:celonis")
+    s.add_argument("--ats", help="Skip detection, e.g. greenhouse:celonis or workday:tenant.wd3/SiteName")
     s.add_argument("--why")
     s.set_defaults(func=cmd_watchlist)
 
